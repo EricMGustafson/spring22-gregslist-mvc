@@ -4,7 +4,7 @@ export class Car {
   constructor({ id = generateId(), make, model, year, mileage, color, img, price, description }) {
     // handle out conditions first
     if (!make || !model || !price) {
-      throw new Error('You can\'t add a car without a make model and price')
+      throw new Error('You can\'t list a car without a make model and price')
     }
     // handle out conditions first
     if (price <= 0) {
@@ -21,9 +21,9 @@ export class Car {
     this.img = img || ''
   }
 
-  get CardTemplate() {
+  get CarTemplate() {
     return `
-    <div class="car col-md-4 p-4">
+    <div class="house col-md-4 p-4">
       <div class="bg-white shadow rounded">
         <img class="w-100 rounded-top" src="${this.img}" alt="${this.model}-image">
         <div class="p-3">

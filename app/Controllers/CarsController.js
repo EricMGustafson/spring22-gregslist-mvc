@@ -1,12 +1,12 @@
 import { ProxyState } from "../AppState.js";
-import { getCarform } from "../components/CarForm.js";
+import { getCarForm } from "../components/CarForm.js";
 import { carsService } from "../Services/CarsService.js";
 import { Pop } from "../Utils/Pop.js";
 
 function _drawCars() {
   let carsCardsTemplate = ''
 
-  ProxyState.cars.forEach(car => carsCardsTemplate += car.CardTemplate)
+  ProxyState.cars.forEach(car => carsCardsTemplate += car.CarTemplate)
 
   document.getElementById('listings').innerHTML = `
     <div class="row cars">
@@ -14,7 +14,7 @@ function _drawCars() {
     </div>
   `
 
-  document.getElementById('listing-modal-form-slot').innerHTML = getCarform()
+  document.getElementById('listing-modal-form-slot').innerHTML = getCarForm()
   document.getElementById('add-listing-modal-label').innerText = 'Add Car 🚗'
 }
 
