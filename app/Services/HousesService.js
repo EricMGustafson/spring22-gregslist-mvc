@@ -3,7 +3,7 @@ import { House } from "../Models/House.js";
 
 class HousesService {
   addHouse(formData) {
-    let newHouse = new House(formData)
+    const newHouse = new House(formData)
     ProxyState.houses = [newHouse, ...ProxyState.houses]
   }
 }

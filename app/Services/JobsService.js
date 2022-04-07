@@ -3,7 +3,7 @@ import { Job } from "../Models/Job.js";
 
 class JobsServices {
   addJob(formData) {
-    let newJob = new Job(formData)
+    const newJob = new Job(formData)
     ProxyState.jobs = [newJob, ...ProxyState.jobs]
   }
 }

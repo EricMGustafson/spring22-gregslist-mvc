@@ -23,6 +23,7 @@ export class JobsController {
   }
 
   addJob() {
+    debugger
     try {
       event.preventDefault()
       /**@type {HTMLFormElement} */
