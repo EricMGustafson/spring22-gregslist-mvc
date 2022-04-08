@@ -8,5 +8,4 @@ class HousesService {
   }
 }
 
-
 export const houseService = new HousesService()

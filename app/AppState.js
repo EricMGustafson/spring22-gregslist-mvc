@@ -14,7 +14,7 @@ class AppState extends EventEmitter {
       color: 'White',
       image: 'https://designingidea.com/wp-content/uploads/2020/05/house-with-beige-exterior-paint-black-front-door.jpg',
       price: 750000,
-      squareFoot: 2400,
+      sqft: 2400,
       year: 2007
     })
   ]
@@ -36,7 +36,7 @@ class AppState extends EventEmitter {
     new Job ({
       company: 'Fancy Spares',
       experience: 'If you don\'t know anything about spares, GET OUT!',
-      hours: '50/week',
+      hours: '2000',
       image: 'https://www.spares.se/upload/LOGO.png',
       position: 'Spare Expert (replacement)',
       salary: '$8 an hour',

@@ -5,25 +5,27 @@ import { getJobForm } from "../components/JobForm.js";
 
 function _drawJobs() {
   let jobsCardsTemplate = ''
+
   ProxyState.jobs.forEach(j => jobsCardsTemplate += j.JobTemplate)
+
   document.getElementById('listings').innerHTML = `
   <div class="row jobs">
     ${jobsCardsTemplate}
   </div>
   `
+
   document.getElementById('listing-modal-form-slot').innerHTML = getJobForm()
   document.getElementById('add-listing-modal-label').innerText = 'Add Job 💼'
 }
 
 export class JobsController {
+ 
   constructor() {
     ProxyState.on ('jobs', _drawJobs)
-    _drawJobs()
-    console.log('hello from the jobs controller');
   }
 
   addJob() {
-    debugger
+
     try {
       event.preventDefault()
       /**@type {HTMLFormElement} */
@@ -38,12 +40,16 @@ export class JobsController {
         salary: formElem.salary.value,
         url: formElem.url.value
       }
+      
+      
       jobsService.addJob(formData)
+      
       formElem.reset()
       // @ts-ignore
       bootstrap.Modal.getOrCreateInstance(document.getElementById('add-listing-modal')).hide()
       
     } catch (error) {
+      
       console.error('ADD_JOB_FORM_ERROR', error)
       
     }
@@ -52,6 +58,6 @@ export class JobsController {
   drawJobs() {
     _drawJobs()
     // @ts-ignore
-    bootstrap.Offcanvas.getOrCreateInstance(document.getElementById('sidenave')).hide()
+    bootstrap.Offcanvas.getOrCreateInstance(document.getElementById('sidenav')).hide()
   }
 }

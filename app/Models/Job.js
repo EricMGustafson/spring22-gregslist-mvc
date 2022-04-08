@@ -25,13 +25,10 @@ export class Job {
       <img class="w-100 rounded-top" src="${this.image}" alt="${this.company}-image">
       <div class="p-3">
         <p class="text-center uppercase"><b>${this.company} - ${this.position} - ${this.hours}</b></p>
-        <p class="m-0">Bedrooms: ${this.experience}</p>
+        <p class="m-0">${this.experience}</p>
       </div>
       <div class="p-3 d-flex justify-content-between align-items-center">
-        <p class="m-0">$${this.salary}</p>
-        <div class="d-flex align-items-center">
-          <p class="m-0">Color:</p>
-        </div>
+        <p class="m-0">${this.salary}</p>
         <div>
           <button class="btn btn-success">Apply Here</button>
 

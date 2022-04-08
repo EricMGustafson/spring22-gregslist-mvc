@@ -2,9 +2,12 @@ import { ProxyState } from "../AppState.js";
 import { getHouseForm } from "../components/HouseForm.js";
 import { houseService } from "../Services/HousesService.js";
 
+
 function _drawHouses() {
   let housesCardsTemplate = ''
-  ProxyState.houses.forEach(h => housesCardsTemplate = h.HouseTemplate)
+
+  ProxyState.houses.forEach(h => housesCardsTemplate += h.HouseTemplate)
+
   document.getElementById('listings').innerHTML = `
     <div class="row houses">
       ${housesCardsTemplate}
@@ -19,7 +22,6 @@ export class HousesController {
   //  Do I want to do anything on page load?
   constructor() {
     ProxyState.on('houses', _drawHouses)
-    console.log('hello from house controller');
   }
 
   addHouse() {
@@ -31,7 +33,7 @@ export class HousesController {
       let formElem = event.target
       let formData = {
       address: formElem.address.value,
-      squareFoot: formElem.squareFoot.value,
+      sqft: formElem.sqft.value,
       year: formElem.year.value,
       bedrooms: formElem.bedrooms.value,
       bathrooms: formElem.bathrooms.value,
@@ -41,15 +43,18 @@ export class HousesController {
       description: formElem.description.value 
     }
     houseService.addHouse(formData)
+
     formElem.reset()
     // @ts-ignore
     bootstrap.Modal.getOrCreateInstance(document.getElementById('add-listing-modal')).hide()
 
     } catch (error) {
+
       console.error('ADD HOUSE FORM ERROR', error)
       throw new Error('Error')
     }
   }
+
   drawHouses() {
     _drawHouses()
     // @ts-ignore
