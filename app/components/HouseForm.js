@@ -5,7 +5,7 @@ export function getHouseForm() {
     <div>
       <label for="year" class="form-label">Year</label>
       <input type="number" class="form-control" name="year" id="year" aria-describedby="year"
-        placeholder="Year..." min="1950" max="2022" required>
+        placeholder="Year..." min="1900" max="2023" required>
     </div>
     <div>
       <label for="bedrooms" class="form-label">bedrooms</label>
@@ -23,6 +23,16 @@ export function getHouseForm() {
       <label for="price" class="form-label">Price</label>
       <input type="number" class="form-control" name="price" id="price" aria-describedby="price"
         placeholder="Price..." min='1' required>
+    </div>
+  </div>
+  <div class="mb-3 d-flex justify-content-between">
+  <div>
+      <label for="bedrooms" class="form-label">Bedrooms</label>
+      <input type="bedrooms" class="form-control" name="bedrooms" id="bedrooms" aria-describedby="bedrooms" required>
+    </div>
+    <div>
+      <label for="bathrooms" class="form-label">Bathrooms</label>
+      <input type="bathrooms" class="form-control" name="bathrooms" id="bathrooms" aria-describedby="bathrooms" required>
     </div>
   </div>
   <div class="mb-3">

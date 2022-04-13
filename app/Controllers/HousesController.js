@@ -2,6 +2,7 @@ import { ProxyState } from "../AppState.js";
 import { getHouseForm } from "../components/HouseForm.js";
 import { houseService } from "../Services/HousesService.js";
 
+
 function _drawHouses() {
   let housesCardsTemplate = ''
   ProxyState.houses.forEach(h => housesCardsTemplate += h.HouseTemplate)
@@ -52,6 +53,7 @@ export class HousesController {
     bootstrap.Modal.getOrCreateInstance(document.getElementById('add-listing-modal')).hide()
 
     } catch (error) {
+
       console.error('ADD HOUSE FORM ERROR', error)
       throw new Error('Error')
     }

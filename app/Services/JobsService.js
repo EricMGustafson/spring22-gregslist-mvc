@@ -21,7 +21,4 @@ class JobsServices {
   }
 }
 
-
-
-
 export const jobsService = new JobsServices()

@@ -35,7 +35,7 @@ export class CarsController {
   }
 
   addCar() {
-    // DO THIS like always
+    debugger// DO THIS like always
     try {
       window.event.preventDefault()
       /**@type {HTMLFormElement} */
@@ -50,6 +50,8 @@ export class CarsController {
         imgUrl: formElem.imgUrl.value,
         year: formElem.year.value,
       }
+     
+     
       carsService.addCar(formData)
 
       formElem.reset()

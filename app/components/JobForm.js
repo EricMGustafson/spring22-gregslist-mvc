@@ -3,7 +3,7 @@ export function getJobForm() {
   <form onsubmit="app.jobsController.addJob()">
   <div class="mb-3 d-flex justify-content-between">
     <div>
-      <label for="company" class="form-label">company</label>
+      <label for="company" class="form-label">Company</label>
       <input type="text" class="form-control" name="company" id="company" aria-describedby="company"
         placeholder="company..." required>
     </div>

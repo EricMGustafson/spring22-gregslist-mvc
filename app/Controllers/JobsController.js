@@ -13,17 +13,21 @@ async function _getAllJobs() {
 
 function _drawJobs() {
   let jobsCardsTemplate = ''
+
   ProxyState.jobs.forEach(j => jobsCardsTemplate += j.JobTemplate)
+
   document.getElementById('listings').innerHTML = `
   <div class="row jobs">
     ${jobsCardsTemplate}
   </div>
   `
+
   document.getElementById('listing-modal-form-slot').innerHTML = getJobForm()
   document.getElementById('add-listing-modal-label').innerText = 'Add Job 💼'
 }
 
 export class JobsController {
+ 
   constructor() {
     ProxyState.on ('jobs', _drawJobs)
     _getAllJobs()
@@ -48,6 +52,7 @@ export class JobsController {
       bootstrap.Modal.getOrCreateInstance(document.getElementById('add-listing-modal')).hide()
       
     } catch (error) {
+      
       console.error('ADD_JOB_FORM_ERROR', error)
       
     }
