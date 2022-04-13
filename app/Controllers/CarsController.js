@@ -18,27 +18,36 @@ function _drawCars() {
   document.getElementById('add-listing-modal-label').innerText = 'Add Car 🚗'
 }
 
+async function _getAllCars() {
+  try {
+    await carsService.getAllCars()
+    
+  } catch (error) {
+    console.error('GET ALL CARS ERROR', error)
+  }
+}
+
 export class CarsController {
   //  Do I want to do anything on page load?
   constructor() {
     ProxyState.on('cars', _drawCars)
-    _drawCars()
+    _getAllCars()
   }
 
   addCar() {
     // DO THIS like always
     try {
-      event.preventDefault()
+      window.event.preventDefault()
       /**@type {HTMLFormElement} */
       // @ts-ignore
-      const formElem = event.target
+      const formElem = window.event.target
       const formData = {
         make: formElem.make.value,
         model: formElem.model.value,
         price: formElem.price.value,
         color: formElem.color.value,
         description: formElem.description.value,
-        img: formElem.img.value,
+        imgUrl: formElem.imgUrl.value,
         year: formElem.year.value,
       }
       carsService.addCar(formData)
@@ -51,6 +60,14 @@ export class CarsController {
       // show this to the user
       console.error('[ADD_CAR_FORM_ERROR]', error)
       Pop.toast(error.message, 'error')
+    }
+  }
+
+  async removeCar(id){
+    try {
+      await carsService.removeCar(id)      
+    } catch (error) {
+      console.error('CAR REMOVE ERROR', error)      
     }
   }
 

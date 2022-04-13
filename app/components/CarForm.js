@@ -31,8 +31,8 @@ export function getCarForm() {
     </div>
     <div class="mb-3">
       <div>
-        <label for="img" class="form-label">Image Url</label>
-        <input type="url" class="form-control" name="img" id="img" aria-describedby="img"
+        <label for="imgUrl" class="form-label">Image Url</label>
+        <input type="url" class="form-control" name="imgUrl" id="imgUrl" aria-describedby="imgUrl"
           placeholder="Image Url..." required>
       </div>
     </div>

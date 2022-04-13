@@ -3,6 +3,14 @@ import { jobsService } from "../Services/JobsService.js";
 import { getJobForm } from "../components/JobForm.js";
 
 
+async function _getAllJobs() {
+  try {
+    await jobsService.getAllJobs()
+  } catch (error) {
+    console.error('GET JOBS ERROR', error)
+  }
+}
+
 function _drawJobs() {
   let jobsCardsTemplate = ''
   ProxyState.jobs.forEach(j => jobsCardsTemplate += j.JobTemplate)
@@ -18,27 +26,23 @@ function _drawJobs() {
 export class JobsController {
   constructor() {
     ProxyState.on ('jobs', _drawJobs)
-    _drawJobs()
-    console.log('hello from the jobs controller');
+    _getAllJobs()
   }
 
-  addJob() {
-    debugger
+  async addJob() {
     try {
-      event.preventDefault()
+      window.event.preventDefault()
       /**@type {HTMLFormElement} */
       // @ts-ignore
-      let formElem = event.target
+      let formElem = window.event.target
       let formData = {
         company: formElem.company.value,
-        experience: formElem.company.value,
+        description: formElem.description.value,
         hours: formElem.hours.value,
-        image: formElem.image.value,
-        position: formElem.position.value,
-        salary: formElem.salary.value,
-        url: formElem.url.value
+        jobTitle: formElem.jobTitle.value,
+        rate: formElem.rate.value,
       }
-      jobsService.addJob(formData)
+     await jobsService.addJob(formData)
       formElem.reset()
       // @ts-ignore
       bootstrap.Modal.getOrCreateInstance(document.getElementById('add-listing-modal')).hide()
@@ -49,9 +53,17 @@ export class JobsController {
     }
   }
 
+  async removeJob(id) {
+    try {
+      await jobsService.removeJob(id)
+    } catch (error) {
+      console.error('JOB REMOVE ERROR', error)
+    }
+  }
+
   drawJobs() {
     _drawJobs()
     // @ts-ignore
-    bootstrap.Offcanvas.getOrCreateInstance(document.getElementById('sidenave')).hide()
+    bootstrap.Offcanvas.getOrCreateInstance(document.getElementById('sidenav')).hide()
   }
 }
