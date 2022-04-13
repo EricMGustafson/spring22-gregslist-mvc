@@ -16,8 +16,11 @@ class HousesService {
   }
 
   async editHouse(formData) {
-    const response = await sandboxApi.put('houses/', +formData.id, formData)
+    const response = await sandboxApi.put('houses/' +formData.id, formData)
     const house = new House(response.data)
+    const index = ProxyState.houses.findIndex(h => h.id == house.id)
+    ProxyState.houses.splice(index, 1, house)
+    ProxyState.houses = ProxyState.houses
     
   }
 

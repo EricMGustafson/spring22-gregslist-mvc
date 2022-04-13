@@ -1,7 +1,7 @@
 import { ProxyState } from "../AppState.js";
 import { getHouseForm } from "../components/HouseForm.js";
 import { houseService } from "../Services/HousesService.js";
-
+import { Pop } from "../Utils/Pop.js";
 
 function _drawHouses() {
   let housesCardsTemplate = ''
@@ -31,7 +31,7 @@ export class HousesController {
     _getAllHouses()
   }
 
-  async addHouse() {
+  async handleSubmit(id) {
     // DO THIS like always
     try {
       window.event.preventDefault()
@@ -47,7 +47,12 @@ export class HousesController {
         year: formElem.year.value,
         levels: formElem.levels.value
     }
+    if (id == 'undefined'){
       await houseService.addHouse(formData)
+    } else {
+      formData.id = id
+      await houseService.editHouse(formData)
+    }
     formElem.reset()
     // @ts-ignore
     bootstrap.Modal.getOrCreateInstance(document.getElementById('add-listing-modal')).hide()
@@ -58,6 +63,17 @@ export class HousesController {
       throw new Error('Error')
     }
   }
+
+  openEditor(id){
+    let house = ProxyState.houses.find(h => h.id  == id)
+    if (!house) {
+      Pop.toast('Invalid ID', 'error')
+    }
+    document.getElementById('listing-modal-form-slot').innerHTML = getHouseForm(house)
+    // @ts-ignore
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('add-listing-modal')).show()
+  }
+
   async removeHouse(id){
     try {
       await houseService.removeHouse(id)
@@ -65,6 +81,7 @@ export class HousesController {
       console.error('HOUSE REMOVE ERROR', error)
     }
   }
+
   drawHouses() {
     _drawHouses()
     // @ts-ignore

@@ -5,9 +5,7 @@ import { Pop } from "../Utils/Pop.js";
 
 function _drawCars() {
   let carsCardsTemplate = ''
-
   ProxyState.cars.forEach(car => carsCardsTemplate += car.CarTemplate)
-
   document.getElementById('listings').innerHTML = `
     <div class="row cars">
       ${carsCardsTemplate}
@@ -21,7 +19,6 @@ function _drawCars() {
 async function _getAllCars() {
   try {
     await carsService.getAllCars()
-    
   } catch (error) {
     console.error('GET ALL CARS ERROR', error)
   }
@@ -34,8 +31,9 @@ export class CarsController {
     _getAllCars()
   }
 
-  addCar() {
-    debugger// DO THIS like always
+  async handleSubmit(id) {
+    // DO THIS like always
+    debugger
     try {
       window.event.preventDefault()
       /**@type {HTMLFormElement} */
@@ -50,10 +48,12 @@ export class CarsController {
         imgUrl: formElem.imgUrl.value,
         year: formElem.year.value,
       }
-     
-     
-      carsService.addCar(formData)
-
+      if (id == 'undefined'){
+        await carsService.addCar(formData)
+      } else {
+        formData.id = id
+        await carsService.editCar(formData)
+      }
       formElem.reset()
       // @ts-ignore
       bootstrap.Modal.getOrCreateInstance(document.getElementById('add-listing-modal')).hide()
@@ -64,6 +64,18 @@ export class CarsController {
       Pop.toast(error.message, 'error')
     }
   }
+
+ openEditor(id) {
+   debugger
+   let car = ProxyState.cars.find(c => c.id == id)
+   if (!car) {
+     Pop.toast('Invalid ID', 'error')
+     return
+   }
+   document.getElementById('listing-modal-form-slot').innerHTML = getCarForm(car)
+   // @ts-ignore
+   bootstrap.Modal.getOrCreateInstance(document.getElementById('add-listing-modal')).show()
+ }
 
   async removeCar(id){
     try {

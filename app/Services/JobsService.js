@@ -15,6 +15,16 @@ class JobsServices {
     const newJob = new Job(response.data)
     ProxyState.jobs = [...ProxyState.jobs, newJob]
   }
+
+  async editJob(formData) {
+    const response = await sandboxApi.put('jobs/' +formData.id, formData)
+    const job = new Job(response.data)
+    const index = ProxyState.jobs.findIndex(j => j.id == job.id)
+    ProxyState.jobs.splice(index, 1, job)
+    ProxyState.jobs = ProxyState.jobs
+  }
+
+
   async removeJob(id) {
     const response = await sandboxApi.delete('jobs/' +id)
     ProxyState.jobs = ProxyState.jobs.filter(j => j.id !== id)

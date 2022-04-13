@@ -1,5 +1,3 @@
-import { generateId } from "../Utils/generateId.js"
-
 export class Car {
   constructor({ id, make, model, year, color, imgUrl, price, description }) {
     this.id = id
@@ -8,7 +6,7 @@ export class Car {
     this.description = description || ''
     this.price = price
     this.year = year || ''
-    this.color = color || ''
+    this.color = color || '#000000'
     this.imgUrl = imgUrl || ''
   }
 
@@ -27,6 +25,7 @@ export class Car {
             <p class="m-0">Color:</p>
             <div class="color-box border border-dark" style="background-color: ${this.color};"></div>
           </div>
+          <i class="mdi mdi-pencil selectable" onclick="app.carsController.openEditor('${this.id}')"></i>
           <i class="mdi mdi-delete selectable" onclick="app.carsController.removeCar('${this.id}')"></i>
         </div>
       </div>

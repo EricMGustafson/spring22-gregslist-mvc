@@ -10,6 +10,7 @@ class CarsService {
     const cars = response.data.map(c => new Car(c))
     ProxyState.cars = cars
   }
+
   async addCar(formData) {
     const response = await sandboxApi.post('cars', formData)
     const newCar = new Car(response.data)
@@ -23,6 +24,7 @@ class CarsService {
     ProxyState.cars.splice(index, 1, car)
     ProxyState.cars = ProxyState.cars
   }
+  
   async removeCar(id) {
     const response = await sandboxApi.delete('cars/' +id)
     ProxyState.cars = ProxyState.cars.filter(c => c.id !== id)

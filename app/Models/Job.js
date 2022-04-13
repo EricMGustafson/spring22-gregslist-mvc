@@ -1,5 +1,3 @@
-import { generateId } from "../Utils/generateId.js";
-
 export class Job {
   constructor({company, description, hours, id, jobTitle, rate}) {
     this.company = company
@@ -26,7 +24,7 @@ export class Job {
           <p class="m-0">Color:</p>
         </div>
         <div>
-          <button class="btn btn-success">Apply Here</button>
+          <i class="mdi mdi-pencil selectable" onclick="app.jobsController.openEditor('${this.id}')"></i>
           <i class="mdi mdi-delete selectable" onclick="app.jobsController.removeJob('${this.id}')"></i>
         </div>
       </div>
